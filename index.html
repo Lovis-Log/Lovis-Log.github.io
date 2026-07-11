@@ -42,17 +42,43 @@
       font-size: 0.85rem;
       margin-top: 4px;
     }
+    .empty { color: #aaa; text-align: center; margin-top: 40px; }
+    .loading { color: #888; text-align: center; margin-top: 40px; }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🗺️ Lovis-Log</h1>
     <p class="subtitle">个人项目导航</p>
-
-    <div class="card">
-      <a href="/旅行 2026.7.14/">📌 西安 → 兰州 → 成都 · 十日旅行指南</a>
-      <p class="desc">2026年7月14日出发 · 三城十日行程规划</p>
-    </div>
+    <div id="list"><p class="loading">加载中…</p></div>
   </div>
+
+  <script>
+    (async () => {
+      const list = document.getElementById('list');
+      const EXCLUDE = new Set(['.github', 'css', 'js', 'images']);
+
+      try {
+        const res = await fetch('https://api.github.com/repos/Lovis-Log/Lovis-Log.github.io/contents/');
+        if (!res.ok) throw new Error('API 请求失败');
+        const items = await res.json();
+
+        const folders = items.filter(f => f.type === 'dir' && !EXCLUDE.has(f.name));
+
+        if (!folders.length) {
+          list.innerHTML = '<p class="empty">暂无项目，开始添加吧 🚀</p>';
+          return;
+        }
+
+        list.innerHTML = folders.map(f =>
+          `<div class="card">
+            <a href="/${encodeURIComponent(f.name)}/">📁 ${f.name}</a>
+          </div>`
+        ).join('');
+      } catch (e) {
+        list.innerHTML = '<p class="empty">加载失败，请刷新重试</p>';
+      }
+    })();
+  </script>
 </body>
 </html>
