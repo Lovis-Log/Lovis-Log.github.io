@@ -1,0 +1,303 @@
+:root {
+  --xian: #c44536;
+  --xian-light: #fdf0ed;
+  --xian-bg: #fef9f7;
+  --lanzhou: #d4950b;
+  --lanzhou-light: #fef9ed;
+  --lanzhou-bg: #fffdf7;
+  --chengdu: #2e8b57;
+  --chengdu-light: #edf7f1;
+  --chengdu-bg: #f7fcf9;
+  --text: #2c3e50;
+  --text-muted: #6b7280;
+  --bg: #f8f9fb;
+  --card-bg: #fff;
+  --border: #e5e7eb;
+}
+
+/* ── Hero ── */
+.hero {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
+  color: #fff;
+  text-align: center;
+  padding: 80px 24px 64px;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(ellipse at 30% 30%, rgba(196,69,54,0.15) 0%, transparent 50%),
+              radial-gradient(ellipse at 65% 40%, rgba(212,149,11,0.12) 0%, transparent 45%),
+              radial-gradient(ellipse at 50% 60%, rgba(46,139,87,0.10) 0%, transparent 50%);
+  animation: heroFloat 20s ease-in-out infinite;
+}
+@keyframes heroFloat {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(1%, -1%) scale(1.02); }
+  66% { transform: translate(-1%, 1%) scale(1.01); }
+}
+.hero h1 {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  position: relative;
+  z-index: 1;
+}
+.hero .subtitle {
+  margin-top: 12px;
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: rgba(255,255,255,0.7);
+  position: relative;
+  z-index: 1;
+}
+.hero .route {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+}
+.hero .route .city-tag {
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+}
+.route .city-tag:nth-child(1) { background: var(--xian); }
+.route .city-tag:nth-child(3) { background: var(--lanzhou); }
+.route .city-tag:nth-child(5) { background: var(--chengdu); }
+.route .arrow { font-size: 1.3rem; opacity: 0.5; }
+
+/* ── Overview Bar ── */
+.overview {
+  max-width: 1000px;
+  margin: -28px auto 0;
+  padding: 0 20px;
+  position: relative;
+  z-index: 2;
+}
+.overview-inner {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+  padding: 24px 32px;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 16px;
+  text-align: center;
+}
+.overview-inner .stat b {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+.overview-inner .stat span {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* ── Section ── */
+.container { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+
+.city-section { margin: 48px 0; }
+
+.city-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.city-header .icon {
+  width: 48px; height: 48px;
+  border-radius: 14px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.5rem;
+  color: #fff;
+  font-weight: 800;
+  flex-shrink: 0;
+}
+.city-xian .icon { background: var(--xian); }
+.city-lanzhou .icon { background: var(--lanzhou); }
+.city-chengdu .icon { background: var(--chengdu); }
+
+.city-header h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+.city-header .dates {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.city-xian h2 { color: var(--xian); }
+.city-lanzhou h2 { color: var(--lanzhou); }
+.city-chengdu h2 { color: var(--chengdu); }
+
+/* ── Day Cards ── */
+.day-card {
+  background: var(--card-bg);
+  border-radius: 14px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+  margin-bottom: 18px;
+  overflow: hidden;
+  border-left: 4px solid transparent;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.day-card:hover {
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+.city-xian .day-card { border-left-color: var(--xian); }
+.city-lanzhou .day-card { border-left-color: var(--lanzhou); }
+.city-chengdu .day-card { border-left-color: var(--chengdu); }
+
+.day-card-header {
+  padding: 18px 22px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+.day-card-header:hover { background: rgba(0,0,0,0.01); }
+.day-card-header h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.day-label {
+  font-size: 0.8rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.city-xian .day-label { background: var(--xian-light); color: var(--xian); }
+.city-lanzhou .day-label { background: var(--lanzhou-light); color: var(--lanzhou); }
+.city-chengdu .day-label { background: var(--chengdu-light); color: var(--chengdu); }
+
+.day-card-header .toggle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  transition: transform 0.3s;
+}
+.day-card.open .day-card-header .toggle { transform: rotate(180deg); }
+
+.day-card-body-inner {
+  padding: 0 22px 20px;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+  margin: 0 22px;
+}
+
+/* ── Timeline Items ── */
+.timeline { list-style: none; }
+.timeline li {
+  display: flex;
+  gap: 14px;
+  padding: 10px 0;
+  border-bottom: 1px dashed #f0f0f0;
+  font-size: 0.93rem;
+  align-items: flex-start;
+}
+.timeline li:last-child { border-bottom: none; }
+.timeline .time {
+  min-width: 80px;
+  font-weight: 600;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  padding-top: 1px;
+  flex-shrink: 0;
+}
+.city-xian .timeline .time { color: var(--xian); }
+.city-lanzhou .timeline .time { color: var(--lanzhou); }
+.city-chengdu .timeline .time { color: var(--chengdu); }
+
+/* ── Reminder Box ── */
+.reminder {
+  border-radius: 10px;
+  padding: 16px 20px;
+  margin: 20px 0 8px;
+  font-size: 0.9rem;
+}
+.reminder strong { display: block; margin-bottom: 6px; }
+.city-xian .reminder { background: var(--xian-light); border: 1px solid #f5c6bc; }
+.city-lanzhou .reminder { background: var(--lanzhou-light); border: 1px solid #fbe5a0; }
+.city-chengdu .reminder { background: var(--chengdu-light); border: 1px solid #b7dcc8; }
+.reminder ul { margin: 6px 0 0 18px; }
+.reminder li { margin: 2px 0; }
+
+/* ── Section subtitle ── */
+.section-subtitle {
+  font-weight: 700;
+  margin: 14px 0 8px;
+  font-size: 0.95rem;
+}
+.city-xian .section-subtitle { color: var(--xian); }
+.city-lanzhou .section-subtitle { color: var(--lanzhou); }
+.city-chengdu .section-subtitle { color: var(--chengdu); }
+
+/* ── Highlight Tag ── */
+.highlight {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin-left: 6px;
+}
+.hl-red { background: #fdecea; color: #c0392b; }
+.hl-yellow { background: #fef5e7; color: #b8860b; }
+.hl-green { background: #eafaf1; color: #1e8449; }
+.hl-blue { background: #eaf2f8; color: #2471a3; }
+
+/* ── Section Divider ── */
+.divider {
+  display: flex; align-items: center; gap: 16px;
+  margin: 52px 0 36px; color: var(--text-muted);
+  font-size: 0.85rem; font-weight: 600; letter-spacing: 0.08em;
+}
+.divider::before, .divider::after {
+  content: ''; flex: 1; height: 1px;
+  background: var(--border);
+}
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 48px 20px 36px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 640px) {
+  .hero { padding: 56px 16px 44px; }
+  .hero h1 { font-size: 1.5rem; }
+  .overview-inner { padding: 16px 20px; }
+  .overview-inner .stat b { font-size: 1.2rem; }
+  .day-card-header { padding: 14px 16px; }
+  .day-card-header h3 { font-size: 0.95rem; }
+  .day-card-body-inner { padding: 0 12px 14px; margin: 0 16px; padding-top: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  .timeline .time { min-width: 68px; font-size: 0.75rem; }
+  .route { gap: 8px; }
+  .route .city-tag { padding: 6px 16px; font-size: 0.85rem; }
+}
+
+@media print {
+  body { background: #fff; }
+  .hero { background: #1a1a2e !important; -webkit-print-color-adjust: exact; }
+  .day-card { break-inside: avoid; box-shadow: none; border: 1px solid #ddd; }
+  .day-card-body { display: block !important; }
+  .day-card-header .toggle { display: none; }
+  .day-card-header { cursor: default; }
+}

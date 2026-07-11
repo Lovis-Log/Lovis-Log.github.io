@@ -1,0 +1,471 @@
+import './App.css';
+import DayCard from './components/DayCard';
+
+/* ── Helper: inline styles as JS objects ── */
+const red = { color: '#c00000' };
+const muted = { color: '#888', fontSize: '0.85rem' };
+
+function App() {
+  return (
+    <>
+      {/* ═══════════ HERO ═══════════ */}
+      <header className="hero">
+        <h1>西安 → 兰州 → 成都</h1>
+        <p className="subtitle">十日三城 · 穿越千年丝路与巴蜀</p>
+        <div className="route">
+          <span className="city-tag">🏯 西安</span>
+          <span className="arrow">→</span>
+          <span className="city-tag">🌊 兰州</span>
+          <span className="arrow">→</span>
+          <span className="city-tag">🐼 成都</span>
+        </div>
+      </header>
+
+      {/* ═══════════ OVERVIEW ═══════════ */}
+      <div className="overview">
+        <div className="overview-inner">
+          <div className="stat"><b>7.14 – 7.24</b><span>旅行日期</span></div>
+          <div className="stat"><b>3 座城市</b><span>西安 · 兰州 · 成都</span></div>
+          <div className="stat"><b>10 天行程</b><span>3 + 3 + 4 天</span></div>
+          <div className="stat"><b>4 人出行</b><span>好友同游</span></div>
+        </div>
+      </div>
+
+      <div className="container">
+
+        {/* ═══════════ 出发日 ═══════════ */}
+        <div className="divider">🚂 出发日 · 7月14日</div>
+        <DayCard label="出发" title="📦 大竹 → 达州 → 西安" defaultOpen>
+          <ul className="timeline">
+            <li><span className="time">上午11:30</span>从大竹出发坐车去达州火车站</li>
+            <li><span className="time">13:16–19:22</span>车次 <strong><span style={red}>K692 13:16–19:22</span></strong></li>
+            <li><span className="time"></span>到达西安东站</li>
+            <li><span className="time">约8:30</span>坐地铁去西安站(50min)</li>
+            <li><span className="time"></span>找到酒店 放行李</li>
+            <li><span className="time"></span>坐火车去兰州 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;西安站--兰州站</li>
+            <li><span className="time">7:53–15:05</span>Z265 7:53–15:05</li>
+            <li><span className="time"></span>坐动车去成都</li>
+          </ul>
+        </DayCard>
+
+        {/* ═══════════ 西安 ═══════════ */}
+        <div className="city-section city-xian">
+          <div className="city-header">
+            <div className="icon">西</div>
+            <div>
+              <h2>西安 · 华山</h2>
+              <div className="dates">7.15 — 7.17 | 兵马俑 · 回坊美食</div>
+            </div>
+          </div>
+
+          {/* ── 西安 Day 1 ── */}
+          <DayCard label="Day 1 · 7.15" title="西安站出发｜广仁寺→洒金桥→大皮院→回民街｜下午陕历博 备选方案→大慈恩寺 + 大雁塔 + 大唐不夜城" defaultOpen>
+            <div className="reminder">
+              <strong>基础前置提醒</strong>
+              <ul>
+                <li><strong>广仁寺</strong>:免费免预约，夏令 7:30–18:00(17:30 停止入园)，玉祥门地铁 D 口步行约 1km、10–12 分钟</li>
+                <li><strong>陕西历史博物馆</strong>:免费票<strong>提前 5 天 17 点公众号抢票</strong>；没抢到直接走备用钟鼓楼环线</li>
+                <li><strong>大慈恩寺</strong>:门票 40 元，登塔额外 25 元；大雁塔北广场音乐喷泉夜间氛围感最强</li>
+                <li>起点默认:<strong>西安站附近酒店</strong></li>
+              </ul>
+            </div>
+            <p className="section-subtitle">上午段:广仁寺→洒金桥→大皮院→回民街(逛吃回坊美食)</p>
+            <ul className="timeline">
+              <li><span className="time">07:00</span>08:00 起床 + 洗漱 + 早餐<br/>简单吃包子、豆浆、鸡蛋垫肚子，预留出门收拾时间</li>
+              <li><span className="time">08:00</span>08:22 地铁前往玉祥门<br/>地铁线路:<br/><mark>西安站地铁站→4 号线(航天新城方向)→五路口站换乘<strong>1 号线(沣河森林公园方向)</strong>→<strong>玉祥门站 D 口出站</strong></mark></li>
+              <li><span className="time">08:22</span>08:35 步行 1km 前往广仁寺(12 分钟)<br/>路线:<mark>D 口出站→西北一路直行→广仁寺正门</mark></li>
+              <li><span className="time">08:35</span>10:10 游览广仁寺<br/>游览顺序:<mark>山门领免费三炷香→天王殿→古佛殿→千佛殿→转经筒长廊→白玉宝塔→祈福墙</mark><br/>✅看点:西安唯一藏传皇家喇嘛寺、红墙白塔氛围感极强，可免费领金刚结、黄财神卡<br/>⚠️礼仪:顺时针转经筒、不踩门槛、殿内禁止拍照</li>
+              <li><span className="time">10:10</span>10:25 步行前往洒金桥(15 分钟)<br/><mark>广仁寺出门向南→西北一路→直行抵达<strong>洒金桥美食街北口</strong></mark></li>
+              <li><span className="time">10:25</span>11:45 洒金桥逛吃(本地人老牌美食街)<br/>必吃清单:马洪小炒泡馍、胖子甑糕、肉丸胡辣汤、老金家水盆羊肉、酸汤水饺<br/>适合慢慢边走边尝，解决早午饭衔接</li>
+              <li><span className="time">11:45</span>12:25 步行逛吃:洒金桥→大皮院(10 分钟路程)<br/>路线:<mark>洒金桥向东→庙后街→转入<strong>大皮院</strong></mark><br/>推荐:花奶奶酸梅汤、定家小酥肉、穆萨砂锅、盛志望麻酱酿皮，游客少、口味正宗</li>
+              <li><span className="time">12:25</span>13:00 大皮院→回民街(北院门主街)收尾<br/>大皮院向东直行直达鼓楼后侧，出门就是回民街主街<br/>简单打卡拍照即可(主街溢价高，简单逛不用正餐)<br/>13:00 回坊片区全部结束，休整准备出发城南</li>
+            </ul>
+            <p className="section-subtitle">下午主线(预约到陕历博版):陕历博→翠华路吃饭→大慈恩寺</p>
+            <ul className="timeline">
+              <li><span className="time">13:00</span>13:30 地铁前往陕西历史博物馆<br/>地铁:钟楼站搭乘 2 号线(韦曲南方向)→小寨站 E 口出站<br/>出站向东步行 800 米(10 分钟)抵达陕历博正门，全程合计 30 分钟</li>
+              <li><span className="time">13:30</span>16:30 陕西历史博物馆游览(3 小时，深度游览)<br/>1. 凭身份证入园，租赁电子讲解器 30 元 / 台(必租)<br/>2. 重点打卡四大镇馆之宝:镶金兽首玛瑙杯、唐三彩骆驼载乐俑、鎏金舞马衔杯、鸳鸯莲瓣纹金碗<br/>3. 中途展厅休息区随时歇脚，17:00 停止检票入馆，把控时间</li>
+              <li><span className="time">16:30</span>17:10 翠华路、测绘路解决晚餐前简餐(40 分钟)<br/>博物馆出门就是翠华路美食巷<br/>老店推荐:子午路张记肉夹馍、油泼面、水盆羊肉、各类家常菜，性价比高</li>
+              <li><span className="time">17:10</span>17:35 地铁 + 步行前往大慈恩寺)<br/>步行至小寨站→3 号线(保税区方向)→大雁塔站 B 口出站<br/>步行 6 分钟抵达<strong>大慈恩寺南门</strong>，全程合计 25 分钟</li>
+              <li><span className="time">17:35</span>19:00 大慈恩寺(大雁塔)游览(1 小时 25 分钟)<br/>游览路线:<mark>山门→大雄宝殿→玄奘三藏院→大雁塔(自愿登塔)→北门出到大雁塔北广场</mark></li>
+              <li><span className="time">19:00</span>21:30 大雁塔北广场 + 大唐不夜城夜景收尾<br/>1. 蹲守北广场音乐喷泉(晚间场次视觉最佳)<br/>2. 步行向南逛大唐不夜城，打卡不倒翁、唐诗街头雕塑、灯光街区<br/>3. 21:30 结束全天行程，返程回西安站酒店</li>
+              <li><span className="time"></span><strong>返程回西安站路线</strong></li>
+            </ul>
+            <p className="section-subtitle">备用方案:没预约上陕西历史博物馆替换路线(你备注要求)</p>
+            <ul className="timeline">
+              <li><span className="time">13:00</span>13:00–13:10 步行前往<strong>钟鼓楼广场</strong></li>
+              <li><span className="time">13:10</span>13:10–14:30 钟鼓楼打卡(可买票登楼，广场拍照免费)+ 鼓楼回坊二次闲逛</li>
+              <li><span className="time">14:30</span>14:30–15:00 地铁 2 号线直达小寨→大雁塔</li>
+              <li><span className="time">15:00</span>15:00–17:30 提前逛大雁塔、大慈恩寺</li>
+              <li><span className="time">17:30</span>17:30–21:30 大唐不夜城深度逛吃 + 夜景，节奏更松弛</li>
+            </ul>
+          </DayCard>
+
+          {/* ── 西安 Day 2 ── */}
+          <DayCard label="Day 2 · 7.16" title="调整方案:全程徒步上山(自古华山一条路) + 西峰索道下山">
+            <div className="reminder">
+              <strong>二、费用明细(单人旺季)</strong>
+              <ul>
+                <li>华山大门票:160 元</li>
+                <li>西峰索道(下山):140 元</li>
+                <li>西峰出山大巴:40 元</li>
+                <li>自选:长空栈道安全带 30 元、鹞子翻身安全带 30 元</li>
+                <li>合计基础:<strong>340 元 / 人</strong></li>
+              </ul>
+            </div>
+            <p className="section-subtitle">整体路线总览(五座主峰全部走完，必过长空栈道)</p>
+            <ul className="timeline">
+              <li><span className="time"></span><mark>玉泉院(纯徒步起点)→自古华山一条路→北峰→苍龙岭→金锁关→中峰→东峰(鹞子翻身可选)→南峰(长空栈道必走)→西峰→<strong>西峰索道下山</strong>→景区大巴回游客中心</mark><br/>✅ 上山全程徒步，体验完整华山爬坡天险<br/>✅ 东、西、南、北、中五峰全覆盖<br/>✅ 长空栈道必打卡，鹞子翻身可自选<br/>✅ 下山坐索道保护膝盖，匹配你们年轻人充沛体力<br/>✅ 出发交通适配:<strong>西安站火车→华山站</strong></li>
+            </ul>
+            <p className="section-subtitle">交通:西安站→华山站→玉泉院徒步入口</p>
+            <ul className="timeline">
+              <li><span className="time">7:15</span>购票:西安站<span style={red}> <strong>C182</strong> <strong>7:15–8:38</strong> </span>至华山站</li>
+              <li><span className="time"></span>华山站出站去玉泉院</li>
+              <li><span className="time"></span>公交:出站坐<strong>603 路公交 2 元</strong>，直达玉泉院门口，15 分钟</li>
+              <li><span className="time"></span>打车:8–10 元，10 分钟直达登山口(多人更划算)</li>
+            </ul>
+            <p className="section-subtitle">精准时间详细行程</p>
+            <ul className="timeline">
+              <li><span className="time">07:15</span>西安站火车出发</li>
+              <li><span className="time">08:38</span>抵达华山站 → 前往玉泉院</li>
+              <li><span className="time">09:00</span>玉泉院正式开始徒步上山(全程无索道爬升)</li>
+              <li><span className="time"></span><strong>第一段:玉泉院 → 北峰(纯上坡，约 3.5–4 小时，经典险段集中)</strong></li>
+              <li><span className="time">13:00</span>13:00 左右抵达<strong>北峰(云台峰)</strong></li>
+              <li><span className="time"></span>打卡华山论剑石碑，午饭休整、补水</li>
+              <li><span className="time">13:00–14:20</span><strong><mark>北峰 → 擦耳崖 → 苍龙岭 → 金锁关</mark>(1h20min)</strong></li>
+              <li><span className="time">14:20–14:50</span><strong>金锁关短暂休息</strong></li>
+              <li><span className="time">14:50–15:40</span><strong><mark>金锁关→中峰(玉女峰)→东峰(朝阳峰)</mark></strong></li>
+              <li><span className="time"></span>中峰简单打卡路过</li>
+              <li><span className="time"></span>东峰观日台观景，自愿玩<strong>鹞子翻身 30 元</strong></li>
+              <li><span className="time">15:40–16:30</span><strong>东峰上坡至南峰(华山最高峰 2154.9m)</strong></li>
+              <li><span className="time">16:30–17:40</span><strong>重头戏:<em>南峰 + 长空栈道</em></strong></li>
+              <li><span className="time"></span>登顶南峰极顶打卡仰天池海拔碑</li>
+              <li><span className="time"></span>走到南天门牌坊，出门就是长空栈道入口</li>
+              <li><span className="time"></span>两人组队、交 30 元租安全带走栈道，断头路往返</li>
+              <li><span className="time">17:30</span>⚠️ 17:30 左右基本停止排队，务必把控时间</li>
+              <li><span className="time">17:40–18:20</span><strong>南峰平缓下坡走到西峰(莲花峰)</strong></li>
+              <li><span className="time">18:25–18:45</span><strong>西峰索道下山</strong></li>
+              <li><span className="time">18:50–19:30</span><strong>西峰景区大巴返回华山游客中心</strong></li>
+              <li><span className="time"></span><strong>下山完整返程路线(终点:西安站附近酒店)</strong></li>
+            </ul>
+            <p className="section-subtitle">高铁</p>
+            <ul className="timeline">
+              <li><span className="time"></span>游客中心打车 / 公交到<strong>华山北站</strong>(高铁站)</li>
+              <li><span className="time">20:53</span>坐高铁→西安北站(<span style={red}><strong>G1855  20:53–21:21</strong></span>)</li>
+              <li><span className="time"></span>西安北站地铁 2 号线 → 安远门 / 北大街换乘 1 号线 → <strong>西安站</strong>，出站回酒店</li>
+              <li><span className="time"></span><strong>全天徒步路线的返程时间卡点</strong></li>
+              <li><span className="time">18:50</span>18:50 西峰索道下山</li>
+              <li><span className="time">19:00</span>19:00–19:30 坐西峰景区大巴抵达<strong>华山游客中心</strong></li>
+              <li><span className="time">19:35</span>19:35 打车去华山站(10 分钟)</li>
+              <li><span className="time">19:53</span>19:53 搭乘 K83 火车，21:31 抵达西安站，步行回酒店入住</li>
+              <li><span className="time"></span><strong>华山高强度徒步装备清单(玉泉院徒步上山 + 长空栈道 + 西峰索道下)</strong></li>
+            </ul>
+            <p className="section-subtitle">饮水与食物</p>
+            <ul className="timeline">
+              <li><span className="time"></span><strong>水</strong></li>
+              <li><span className="time"></span><strong>补给(四人凑一堆分装)</strong></li>
+              <li><span className="time"></span>能量零食:巧克力、牛肉干、能量棒、卤蛋、小面包</li>
+              <li><span className="time"></span>充饥正餐:压缩饼干、饭团，中午在金锁关简单解决</li>
+              <li><span className="time"></span>小糖果:葡萄糖片，防止体力透支低血糖</li>
+            </ul>
+            <p className="section-subtitle">手机 & 贵重物品(长空栈道专用)</p>
+            <ul className="timeline">
+              <li><span className="time"></span><strong>手机挂绳 / 腰包</strong>，长空栈道不能手攥手机，掉落无法捡拾</li>
+              <li><span className="time"></span>充电宝(四人带 2–3 个足够，轮流用)</li>
+              <li><span className="time"></span>身份证必带:门票实名制、长空栈道登记核验、坐火车往返都要用</li>
+              <li><span className="time"></span>少量现金零钱，防备山上信号差付不了费</li>
+            </ul>
+            <p className="section-subtitle">绝对别带的东西(累赘劝退)</p>
+            <ul className="timeline">
+              <li><span className="time"></span>大瓶饮料、大西瓜、大量水果</li>
+              <li><span className="time"></span>三脚架、过重单反(不嫌累可以带，不推荐)</li>
+              <li><span className="time"></span>登山杖(苍龙岭、长空栈道狭窄路段很碍事，容易戳到人)</li>
+              <li><span className="time"></span>拉杆行李箱，行李全部寄存游客中心储物柜</li>
+            </ul>
+          </DayCard>
+
+          {/* ── 西安 Day 3 ── */}
+          <DayCard label="Day 3 · 7.17" title="西安站→小南门早市→午饭→兵马俑 + 秦始皇陵→晚饭→18:00 华清宫→返回西安站">
+            <div className="reminder">
+              <strong>前置重要提醒</strong>
+              <ul>
+                <li>小南门早市<strong>6:00–9:00 营业，8:30 陆续收摊</strong>，必须早出发；</li>
+                <li>兵马俑、华清宫<strong>提前 1 天公众号实名预约</strong>，刷身份证入园；</li>
+                <li>门票全部提前一天线上预约，免现场排队</li>
+              </ul>
+            </div>
+            <p className="section-subtitle">06:50 西安站酒店出发→地铁去永宁门(小南门早市)</p>
+            <ul className="timeline">
+              <li><span className="time"></span><strong>地铁路线(最稳)</strong></li>
+              <li><span className="time"></span>车程:约 22 分钟，票价 4 元</li>
+              <li><span className="time"></span>出站向西步行 800 米 / 10 分钟直达<strong>小南门(勿幕门)早市</strong></li>
+              <li><span className="time">07:15</span>09:15 逛吃小南门早市(城墙根本地人烟火)<br/>✅必吃:胖子甑糕、油茶麻花、肉丸胡辣汤、肘子夹馍、蜂蜜凉粽<br/>✅玩法:边走边吃，城墙边拍照，8:40 前结束，避免摊位收空<br/>✅避坑:随身看好手机背包，人流拥挤</li>
+              <li><span className="time"></span><strong>步行回永宁门地铁站</strong></li>
+            </ul>
+            <p className="section-subtitle">永宁门→临潼兵马俑</p>
+            <ul className="timeline">
+              <li><span className="time"></span><strong>地铁省钱(学生首选，人均 7 元)</strong></li>
+              <li><span className="time"></span><strong>兵马俑景区附近午饭</strong></li>
+            </ul>
+            <p className="section-subtitle">秦始皇帝陵博物院(兵马俑 + 秦始皇陵)</p>
+            <ul className="timeline">
+              <li><span className="time"></span><strong>兵马俑→华清宫(距离 6 公里，10 分钟车程)</strong></li>
+              <li><span className="time"></span>公交:914/915/307 路，2 元</li>
+              <li><span className="time"></span>打车:一口价 15 元，4 人最划算，赶时间首选</li>
+              <li><span className="time"></span><strong>游玩华清宫</strong></li>
+            </ul>
+            <p className="section-subtitle">临潼晚饭</p>
+            <ul className="timeline">
+              <li><span className="time"></span>选择 1:华清宫门口大唐华清城商业街，陕味小炒、面食、特色小吃<br/>选择 2:返程路上随便简餐，回西安站再大吃一顿</li>
+            </ul>
+            <p className="section-subtitle">华清宫→返回西安站</p>
+            <ul className="timeline">
+              <li><span className="time"></span><strong>地铁</strong></li>
+              <li><span className="time">22:30</span><mark>华清池站乘 9 号线→纺织城→1 号线→五路口→步行 10 分钟到西安站</mark>，总耗时 1 小时 20 分，票价 7 元，地铁 22:30 才收班，容错率极高</li>
+            </ul>
+          </DayCard>
+        </div>
+
+        {/* ═══════════ 兰州 ═══════════ */}
+        <div className="city-section city-lanzhou">
+          <div className="city-header">
+            <div className="icon">兰</div>
+            <div>
+              <h2>兰州 · 牛肉面</h2>
+              <div className="dates">7.18 — 7.20 | 黄河 · 丹霞</div>
+            </div>
+          </div>
+          <div className="reminder">
+            <strong>⚠️ 重要提醒</strong>
+            <ul>
+              <li><strong>甘肃省博物馆</strong> 需提前在微信公众号 <strong>"甘肃省博物馆"</strong> 预约(7月19日周日去，周一闭馆)</li>
+              <li><strong>水墨丹霞旅游专线</strong> 发车时间不稳定，建议出发前一天用 <strong>高德地图</strong> 搜索"水墨丹霞专线"确认，或拨打 <strong>12345</strong> 公交热线查询</li>
+            </ul>
+          </div>
+
+          {/* ── 兰州 Day 1 ── */}
+          <DayCard label="Day 1 · 7.18" title="Day1(7.18 周六)—— 抵达 + 黄河初探 + 夜市" defaultOpen>
+            <ul className="timeline">
+              <li><span className="time">15:05</span>动车到达 <strong>兰州站</strong></li>
+              <li><span className="time">15:05~15:45</span>地铁 <strong>2号线转1号线</strong>(或打车)前往 <strong>西关十字</strong>，办理入住 <span style={muted}>(住在西关十字附近)</span></li>
+              <li><span className="time">15:45~16:15</span>酒店放行李，稍作休整</li>
+              <li><span className="time">16:15~17:00</span>从西关十字 <strong>打车(约15元)</strong> 或 <strong>公交25路</strong> 前往 <strong>黄河母亲雕塑</strong> <span style={muted}>(约3公里，车程15分钟)</span></li>
+              <li><span className="time">17:00~17:30</span>在 <strong>黄河母亲雕塑</strong> 拍照打卡</li>
+              <li><span className="time">17:30~18:30</span>沿黄河 <strong>步行向东</strong> 前往 <strong>中山桥</strong> <span style={muted}>(约2公里，步行30分钟)</span></li>
+              <li><span className="time">18:30~19:30</span>游览 <strong>中山桥</strong>，过桥看黄河</li>
+              <li><span className="time">19:30~20:00</span>从中山桥步行前往 <strong>正宁路夜市</strong> <span style={muted}>(步行约15分钟)</span></li>
+              <li><span className="time">20:00~21:30</span><strong>正宁路夜市</strong> 晚餐 <span style={muted}>(必吃:牛奶鸡蛋醪糟、烤羊肉串、酿皮、灰豆子)</span></li>
+            </ul>
+          </DayCard>
+
+          {/* ── 兰州 Day 2 ── */}
+          <DayCard label="Day 2 · 7.19" title="Day2(7.19 周日)—— 甘肃省博物馆 + 黄河风情线深度">
+            <ul className="timeline">
+              <li><span className="time">08:00~08:30</span>早餐(推荐:磨沟沿牛肉面西关店)</li>
+              <li><span className="time">08:30~09:00</span>地铁 <strong>1号线</strong>(西关十字→兰州西站北广场站，2站)到 <strong>甘肃省博物馆</strong> <span style={muted}>(出站步行5分钟)</span></li>
+              <li><span className="time">09:00~11:30</span>游览 <strong>甘肃省博物馆</strong> <span style={muted}>(⚠️ 提前公众号预约，免费)</span></li>
+              <li><span className="time">11:30~12:30</span>午餐:<strong>吾穆勒蓬灰牛肉面</strong>(西站附近)</li>
+              <li><span className="time">12:30~13:00</span>地铁返回 <strong>西关十字</strong></li>
+              <li><span className="time">13:00~15:00</span>登 <strong>白塔山公园</strong>(中山桥北侧)，俯瞰黄河</li>
+              <li><span className="time">15:00~17:00</span>沿黄河继续东行(水车博览园等)或回酒店休息</li>
+              <li><span className="time">17:00~18:30</span>返回酒店休息或逛 <strong>张掖路步行街</strong></li>
+              <li><span className="time">18:30~20:00</span>晚餐:<strong>春台手抓羊肉</strong> 或 <strong>大自然烤肉</strong></li>
+              <li><span className="time">20:00~21:30</span>黄河边茶摊，喝 <strong>三炮台</strong>，看夜景</li>
+            </ul>
+          </DayCard>
+
+          {/* ── 兰州 Day 3 ── */}
+          <DayCard label="Day 3 · 7.20" title="水墨丹霞一日游">
+            <div className="reminder">
+              <strong>①精确上车点位(非常重要)</strong>
+              <ul>
+                <li>📍集合点:<strong>洪门子公交场站(不是西关地铁站！)</strong></li>
+                <li>步行路线(西关什字酒店出发):</li>
+                <li>西关什字步行街 → 解放门 → 中山桥南侧洪门子大型公交总站(高德地图直接搜:洪门子公交枢纽)</li>
+                <li>步行时间:8~12 分钟，全程平路。</li>
+              </ul>
+            </div>
+            <div className="reminder">
+              <strong>⚠️ 避坑必看(非常关键)</strong>
+              <ul>
+                <li>❌不要坐 N125 城乡公交！需要多次换乘乡村小巴，折腾 2 小时以上，非常累。</li>
+                <li>❌直通车只到外围停车场，不是景区大门口，必须再刷景区票坐内部观光车。</li>
+                <li>丹霞山顶紫外线极强、风大:防晒帽、墨镜、防晒霜、薄外套、运动鞋必带。</li>
+                <li>大巴<strong>过时不候，绝不等人</strong>，务必提前 10 分钟到集合点。</li>
+                <li>省博、丹霞都需要实名制预约，身份证全程随身携带。</li>
+              </ul>
+            </div>
+            <p className="section-subtitle">方案一:西关原地发车(懒人不换乘)</p>
+            <ul className="timeline">
+              <li><span className="time">07:30</span>从西关十字酒店步行至地铁站</li>
+              <li><span className="time">07:30~07:45</span>地铁 <strong>1号线</strong>(西关十字→兰州西站北广场站)</li>
+              <li><span className="time">07:45~08:00</span>出站到 <strong>北广场公交枢纽</strong>，找 <strong>水墨丹霞旅游专线</strong> 站牌 <span style={muted}>(提前一天确认发车时间)</span></li>
+              <li><span className="time">08:00~08:50</span>专线车前往 <strong>水墨丹霞景区</strong> <span style={muted}>(票价约15~20元，车程约50分钟)</span></li>
+              <li><span className="time">09:00~12:30</span>游览景区(观光车 + 徒步)</li>
+              <li><span className="time">12:30~13:00</span>景区内简餐(自带干粮或景区小吃)</li>
+              <li><span className="time">13:00~13:30</span>景区门口候车，乘坐 <strong>回程专线</strong> <span style={muted}>(务必提前拍下回程时刻表)</span></li>
+              <li><span className="time">13:30~14:20</span>专线车返回 <strong>兰州西站北广场</strong></li>
+              <li><span className="time">14:20~14:35</span>地铁1号线返回 <strong>西关十字</strong></li>
+              <li><span className="time">15:00~17:00</span>酒店休息、洗澡</li>
+              <li><span className="time">17:00~18:30</span><strong>兰州中心</strong>(西站旁)或 <strong>大众巷</strong> 觅食</li>
+              <li><span className="time">18:30~20:00</span>晚餐:炒面片 / 灰豆子 / 甜醅子</li>
+              <li><span className="time">20:00~21:00</span>打包行李，准备明天出发</li>
+            </ul>
+            <p className="section-subtitle">方案二(强烈推荐｜早班光线最佳):西关地铁→西站什字→早班直通车</p>
+            <ul className="timeline">
+              <li><span className="time"></span>适合想避开强光、人少、拍照好看。</li>
+            </ul>
+            <p className="section-subtitle">第一段:西关 → 西站什字(地铁 1 号线)</p>
+            <ul className="timeline">
+              <li><span className="time"></span>📍起点:西关什字地铁站(1 号线，往西固方向)</li>
+              <li><span className="time"></span>08:00 酒店出门，步行到西关地铁站 D 口</li>
+              <li><span className="time"></span>08:10 乘坐地铁 1 号线，7 站，约 20 分钟</li>
+              <li><span className="time"></span>08:30 抵达【西站什字站】A 口出站，兰州中心门口集合</li>
+            </ul>
+            <p className="section-subtitle">第二段:西站早班直通车(空调大巴)</p>
+            <ul className="timeline">
+              <li><span className="time"></span>📍集合点:兰州中心南广场公交点(西站什字地铁口旁)</li>
+              <li><span className="time"></span>发车时间:<strong>08:50~09:00 早班直通车</strong></li>
+              <li><span className="time"></span>车程:50 分钟直达景区停车场</li>
+              <li><span className="time"></span>往返车费:30 元 / 人</li>
+            </ul>
+            <p className="section-subtitle">完整全天时间表(最优版)</p>
+            <ul className="timeline">
+              <li><span className="time"></span>08:00 西关酒店出发</li>
+              <li><span className="time"></span>08:30 西站兰州中心集合</li>
+              <li><span className="time"></span>08:55 上车检票</li>
+              <li><span className="time"></span>09:00 大巴发车</li>
+              <li><span className="time"></span>09:50 到达丹霞停车场</li>
+              <li><span className="time"></span>10:00~14:00 游览(上午柔光，色彩浓郁，人少)</li>
+              <li><span className="time"></span>14:00 返程大巴集合</li>
+              <li><span className="time"></span>15:00 返回西站</li>
+              <li><span className="time"></span>15:20 地铁 1 号线返回西关什字</li>
+              <li><span className="time"></span>✅优点:上午光线柔和、丹霞色彩饱和度最高，人少不拥挤，时间充裕。</li>
+            </ul>
+            <p className="section-subtitle">购票步骤</p>
+            <ul className="timeline">
+              <li><span className="time"></span>第一步:小程序 <strong>小兰出行 / 兰州城乡公交</strong> 买往返直通车票，提前 1 天预约</li>
+              <li><span className="time"></span>第二步:官方小程序/美团/携程买景区入园套票(门票+观光车 80 元)，实名制</li>
+            </ul>
+            <p className="section-subtitle">景区内部固定游览路线</p>
+            <ul className="timeline">
+              <li><span className="time"></span><strong>丝路古途 → 丹顶揽胜(制高点)→ 九色丹青(核心机位)→ 丝路霞光观景台 → 丹霞栈道 → 返回游客中心</strong></li>
+              <li><span className="time"></span>全程 3.5~4 小时，景区内便利店极少，自备水和零食。</li>
+            </ul>
+          </DayCard>
+        </div>
+
+        {/* ═══════════ 成都 ═══════════ */}
+        <div className="city-section city-chengdu">
+          <div className="city-header">
+            <div className="icon">蓉</div>
+            <div>
+              <h2>成都 · 熊猫</h2>
+              <div className="dates">7.21 — 7.24 | 三国 · 三星堆</div>
+            </div>
+          </div>
+
+          {/* ── 成都 Day 1 ── */}
+          <DayCard label="Day 1 · 7.21" title="下午抵达 + 宽窄巷子 + 玉林社区" defaultOpen>
+            <p className="section-subtitle">下午抵达 + 宽窄巷子 + 玉林社区</p>
+            <ul className="timeline">
+              <li><span className="time">15:00~15:30</span>动车到成都东站，地铁2→3号线到市二医院站，入住。</li>
+              <li><span className="time">15:30~16:00</span>快速休整。</li>
+              <li><span className="time">16:00~16:20</span>地铁4号线(市二医院→宽窄巷子，2站)。</li>
+              <li><span className="time">16:20~18:30</span>宽窄巷子闲逛，晚餐吃 <strong>贺记蛋烘糕</strong> 或 <strong>大妙火锅</strong>(宽窄巷子附近本地人常去店)。</li>
+              <li><span className="time">18:30~18:50</span>地铁4→3→8号线到芳草街站。</li>
+              <li><span className="time">18:50~21:00</span>逛 <strong>玉林社区</strong>，重点走玉林路、彩虹街，晚餐 <strong>王妈手撕烤兔(玉林老店)</strong> 或 <strong>玉林串串香总店</strong>(避开装修网红的新店)。</li>
+              <li><span className="time">21:00~21:30</span>地铁回酒店。</li>
+            </ul>
+          </DayCard>
+
+          {/* ── 成都 Day 2 ── */}
+          <DayCard label="Day 2 · 7.22" title="武侯祠 + 东郊记忆 + 春熙路快速打卡">
+            <p className="section-subtitle">7.22(周四)武侯祠 + 东郊记忆 + 春熙路快速打卡</p>
+            <ul className="timeline">
+              <li><span className="time">08:00~08:30</span>早餐:<strong>西月城谭豆花</strong>(市二医院附近)。</li>
+              <li><span className="time">08:30~09:00</span>地铁3号线(市二医院→高升桥站)到武侯祠。</li>
+              <li><span className="time">09:00~12:30</span>游览 <strong>武侯祠</strong>(门票50元)，红墙夹道、三国文化。</li>
+              <li><span className="time">12:30~13:30</span>午餐:<strong>明婷饭店</strong>(外曹家巷总店，地铁3号线红星桥站下步行)或 <strong>陈麻婆豆腐(青华路店)</strong>。</li>
+              <li><span className="time">13:30~14:00</span>地铁3→2→8号线(高升桥→春熙路→东郊记忆站)到 <strong>东郊记忆</strong>。</li>
+              <li><span className="time">14:00~17:00</span>东郊记忆工业风拍照、逛创意店。</li>
+              <li><span className="time">17:00~18:00</span>地铁8→2号线(东郊记忆→春熙路)到 <strong>春熙路</strong>，快速路过IFS爬墙熊猫拍照(5分钟)，不逛街。</li>
+              <li><span className="time">18:00~19:30</span>晚餐:<strong>巴蜀大宅门(新南门店)</strong> 或 <strong>蜀九香(春熙路店)</strong>——本地人认可的非网红火锅。</li>
+              <li><span className="time">19:30~21:00</span>沿 <strong>府南河</strong> 散步至合江亭(约20分钟)，夜景优美，无网红拥挤。</li>
+              <li><span className="time">21:00~21:30</span>地铁回酒店。</li>
+            </ul>
+          </DayCard>
+
+          {/* ── 成都 Day 3 ── */}
+          <DayCard label="Day 3 · 7.23" title="都江堰 + 熊猫谷 + 灌县古城 + 南桥夜景">
+            <ul className="timeline">
+              <li><span className="time"></span><strong>成都出发</strong> :乘坐地铁到犀浦站，换乘前往离堆公园的高铁，全程 27 分钟。</li>
+              <li><span className="time"></span><strong>抵达打卡</strong> :到达离堆公园站后，在高铁站门口打卡世界上最大的熊猫雕塑。</li>
+              <li><span className="time"></span><strong>熊猫谷游玩</strong> :打车 15 分钟前往熊猫谷，游览约 2 小时，建议早去，此时熊猫最活跃，还能近距离接触大熊猫和小熊猫，相比成都基地人流更少，游玩体验更舒适。</li>
+              <li><span className="time"></span><strong>钟书阁打卡</strong> :参观完熊猫后，打车前往钟书阁，这里不需要门票，有镜面玻璃和光影设计，藏书达十万册，适合带孩子打卡。</li>
+              <li><span className="time"></span><strong>午餐休整</strong> :在钟书阁附近吃午饭。</li>
+              <li><span className="time"></span><strong>灌县古城游览</strong> :前往灌县古城，逛古街、体验采耳、观看川剧变脸。</li>
+              <li><span className="time"></span><strong>都江堰景区游览</strong> :下午 4 点前往秦堰楼，从 6 号门进入都江堰景区，依次经过二王庙、安澜索桥、鱼嘴、飞沙堰、宝瓶口，6 点半左右从正门出景区。</li>
+              <li><span className="time"></span><strong>南桥夜景</strong> :景区左侧 100 米就是南桥，7 点左右可以观看岷江 "蓝眼泪" 夜景。</li>
+            </ul>
+            <p className="section-subtitle">返程:城际高铁 + 地铁</p>
+            <ul className="timeline">
+              <li><span className="time"></span><strong>都江堰→犀浦站</strong>:</li>
+              <li><span className="time"></span>从都江堰景区附近打车到<strong>离堆公园站</strong>(约 10 分钟，车费 10 元左右)。</li>
+              <li><span className="time"></span>乘坐成灌城际高铁返回<strong>犀浦站</strong>(车程约 25 分钟，票价 10 元)。</li>
+              <li><span className="time"></span><strong>犀浦站→市二医院站</strong>:</li>
+              <li><span className="time"></span>犀浦站出站后，乘坐地铁<strong>2 号线(成都行政学院方向)</strong>，在<strong>春熙路站</strong>换乘地铁<strong>3 号线(成都医学院方向)</strong>，乘坐 1 站到<strong>市二医院站</strong>下车(全程约 40 分钟，地铁费 5 元)。</li>
+            </ul>
+          </DayCard>
+
+          {/* ── 成都 Day 4 ── */}
+          <DayCard label="Day 4 · 7.24" title="三星堆博物馆 + 文殊院">
+            <div className="reminder">
+              <strong>购票提示</strong>
+              <ul>
+                <li>三星堆门票(72元)提前在微信公众号"三星堆博物馆"预约。</li>
+                <li>建议早上8:00从酒店出发，避开人流。</li>
+              </ul>
+            </div>
+            <p className="section-subtitle">交通:市二医院 → 三星堆博物馆</p>
+            <ul className="timeline">
+              <li><span className="time"></span><strong>地铁</strong>:市二医院站(3号线)→ 成都医学院站(终点站)，约40分钟，票价约5元</li>
+              <li><span className="time"></span><strong>方案A(公交)</strong>:出B口，乘坐 <strong>广汉C2路</strong>，投币或扫码2元，到三星堆博物馆站下车，约20~30分钟。</li>
+              <li><span className="time"></span><strong>方案B(打车)</strong>:直接打车，约20分钟，25~30元，更方便且省时间。</li>
+            </ul>
+            <p className="section-subtitle">7.24(周六)详细行程</p>
+            <ul className="timeline">
+              <li><span className="time">07:00~07:30</span>早餐:<strong>严太婆锅盔</strong>(市二医院附近)。</li>
+              <li><span className="time">07:30~08:10</span>地铁3号线(市二医院→成都医学院站)。</li>
+              <li><span className="time">08:10~08:30</span>广汉公交C2路或打车到三星堆。</li>
+              <li><span className="time">08:30~12:30</span>三星堆博物馆游览。</li>
+              <li><span className="time">12:30~13:30</span>午餐:广汉本地 <strong>金丝面</strong>、<strong>叶儿粑</strong>(景区附近，非景区内)。</li>
+              <li><span className="time">13:30~14:30</span>继续游览三星堆园区。</li>
+              <li><span className="time">14:30~15:00</span>返回成都医学院站。</li>
+              <li><span className="time">15:00~15:40</span>地铁回市二医院。</li>
+              <li><span className="time">15:40~17:00</span>休息。</li>
+              <li><span className="time">17:00~18:30</span>自由活动(可去文殊院免费逛逛，地铁3号线2站)。</li>
+              <li><span className="time">18:30~20:00</span>晚餐:<strong>黑竹香鸡(营门口店)</strong> 或 <strong>张烤鸭(青石桥总店)</strong>。</li>
+              <li><span className="time">20:00~21:30</span>回酒店早休息，为次日都江堰+熊猫谷+青城山储备体力。</li>
+            </ul>
+            <p className="section-subtitle">文殊院 + 洞子口张老二凉粉(轻松，适合休整)</p>
+            <ul className="timeline">
+              <li><span className="time">16:00~16:30</span>地铁3号线(市二医院→文殊院站，2站)到文殊院</li>
+              <li><span className="time">16:30~17:30</span>逛文殊院(免费，17:00前可进)，祈福、摸福字墙、逛园林</li>
+              <li><span className="time">17:30~18:30</span>文殊院旁 <strong>洞子口张老二凉粉</strong> 吃甜水面、凉粉、担担面(本地老字号，非网红)</li>
+              <li><span className="time">18:30~19:30</span>散步回地铁站(约10分钟)，或去附近 <strong>宫廷糕点铺</strong> 买点特产(桃酥、拿破仑蛋糕)</li>
+              <li><span className="time">19:30~21:00</span>回酒店休息、整理三星堆照片</li>
+            </ul>
+          </DayCard>
+        </div>
+      </div>
+
+      {/* ═══════════ FOOTER ═══════════ */}
+      <footer>
+        <p>🗺️ 西安 → 兰州 → 成都 · 2025年7月14日—24日 · 十日三城</p>
+        <p style={{ marginTop: 6, opacity: 0.6 }}>Generated from Obsidian Travel Guide · 祝旅途愉快 ✈️</p>
+      </footer>
+    </>
+  );
+}
+
+export default App;
