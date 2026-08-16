@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4efe4" />
+    <title>一封祝福信 · 欧建锋生日快乐</title>
+    <link rel="stylesheet" href="public/page-transition.css" />
+    <style>
+      :root {
+        --ink: #141414;
+        --paper: #f4efe4;
+        --coral: #ff6b6b;
+        --gold: #ffd166;
+        --teal: #06d6a0;
+        --blue: #4cc9f0;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei",
+          "Noto Sans SC", sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .letter-bg {
+        position: fixed;
+        inset: 0;
+        background: url("public/bg-photo.jpg") center / cover no-repeat;
+        opacity: 0.14;
+        filter: saturate(0.7);
+      }
+
+      .letter-page {
+        position: relative;
+        z-index: 1;
+        min-height: 100svh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .top-link {
+        position: fixed;
+        top: 18px;
+        left: 20px;
+        z-index: 8;
+        padding: 6px 12px;
+        border: 2px solid var(--ink);
+        border-radius: 6px;
+        background: var(--paper);
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 600;
+        opacity: 0.72;
+        text-decoration: none;
+        box-shadow: 3px 3px 0 var(--ink);
+      }
+
+      .envelope {
+        position: relative;
+        width: min(88vw, 520px);
+        aspect-ratio: 5 / 3;
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        background: #f2e7d2;
+        box-shadow: 8px 8px 0 rgba(20, 20, 20, 0.75);
+        cursor: pointer;
+        transition: transform 0.7s ease, opacity 0.5s ease;
+      }
+
+      .envelope::before {
+        content: "";
+        position: absolute;
+        left: -2px;
+        right: -2px;
+        top: -2px;
+        height: 62%;
+        border-radius: 10px 10px 0 0;
+        background: #f9f0dc;
+        clip-path: polygon(0 0, 100% 0, 50% 88%);
+        transform-origin: top;
+        transition: transform 0.7s ease;
+      }
+
+      .envelope::after {
+        content: "";
+        position: absolute;
+        left: -2px;
+        right: -2px;
+        bottom: -2px;
+        top: 42%;
+        border-radius: 0 0 10px 10px;
+        background: #eadcc2;
+        clip-path: polygon(0 100%, 50% 42%, 100% 100%);
+      }
+
+      .envelope.open {
+        transform: translateY(10px);
+      }
+
+      .envelope.open::before {
+        transform: rotateX(180deg);
+      }
+
+      .envelope.hidden {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .envelope-face {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        text-align: center;
+      }
+
+      .envelope-name {
+        font-family: "STKaiti", "KaiTi", "STXingkai", "FangSong", serif;
+        font-size: clamp(1.6rem, 5vw, 2.8rem);
+        font-weight: 700;
+      }
+
+      .open-btn {
+        padding: 15px 34px;
+        border: 2px solid var(--ink);
+        border-radius: 8px;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: inherit;
+        font-size: 18px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        cursor: pointer;
+        box-shadow: 5px 5px 0 var(--ink);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .open-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0 var(--ink);
+      }
+
+      .open-btn:focus-visible {
+        outline: 3px solid var(--coral);
+        outline-offset: 3px;
+      }
+
+      .letter {
+        width: min(92vw, 760px);
+        opacity: 0;
+        transform: translateY(36px) scale(0.97);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+      }
+
+      .letter.visible {
+        opacity: 1;
+        transform: none;
+      }
+
+      .letter-paper {
+        position: relative;
+        padding: clamp(26px, 5vw, 58px);
+        border: 2px solid var(--ink);
+        border-radius: 10px;
+        background: #fffdf6;
+        box-shadow: 8px 8px 0 var(--ink);
+      }
+
+      .letter-paper::before,
+      .letter-paper::after {
+        content: "";
+        position: absolute;
+        top: 12px;
+        width: 76px;
+        height: 22px;
+        border-left: 2px solid rgba(20, 20, 20, 0.16);
+        border-right: 2px solid rgba(20, 20, 20, 0.16);
+        background: rgba(255, 214, 102, 0.32);
+        transform: rotate(-3deg);
+      }
+
+      .letter-paper::before {
+        left: 16px;
+      }
+
+      .letter-paper::after {
+        right: 16px;
+        transform: rotate(3deg);
+      }
+
+      .letter-date {
+        margin: 0 0 26px;
+        color: #4b4438;
+        font-size: clamp(14px, 2vw, 17px);
+        font-weight: 600;
+        text-align: right;
+      }
+
+      .letter-salute {
+        font-family: "STKaiti", "KaiTi", "STXingkai", "FangSong", serif;
+        font-size: clamp(1.7rem, 4.4vw, 2.7rem);
+        font-weight: 700;
+        margin: 0 0 18px;
+      }
+
+      .letter-line {
+        margin: 0 0 12px;
+        font-size: clamp(17px, 2.4vw, 23px);
+        font-weight: 600;
+        line-height: 1.9;
+      }
+
+      .letter-line.en {
+        color: #4b4438;
+        font-style: italic;
+      }
+
+      .letter-char {
+        display: inline-block;
+        opacity: 0;
+        transform: translateY(0.4em);
+        transition: opacity 0.5s ease,
+          transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .letter-word {
+        display: inline-block;
+        white-space: nowrap;
+      }
+
+      .letter-char.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .letter-sign {
+        margin: 26px 0 0;
+        font-family: "STKaiti", "KaiTi", "STXingkai", "FangSong", serif;
+        font-size: clamp(1.25rem, 3.4vw, 2rem);
+        font-weight: 600;
+        line-height: 1.8;
+        text-align: right;
+      }
+
+      .letter-actions {
+        display: flex;
+        justify-content: center;
+        gap: 14px;
+        margin-top: 30px;
+        opacity: 0;
+        transition: opacity 0.5s ease;
+      }
+
+      .letter-actions.visible {
+        opacity: 1;
+      }
+
+      .action-btn {
+        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 26px;
+        border: 2px solid var(--ink);
+        border-radius: 8px;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: inherit;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        cursor: pointer;
+        box-shadow: 5px 5px 0 var(--ink);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .action-btn.next {
+        padding: 16px 38px;
+        font-size: 19px;
+        font-weight: 800;
+        box-shadow: 6px 6px 0 var(--ink);
+      }
+
+      .action-btn.back {
+        padding: 8px 16px;
+        font-size: 13px;
+        opacity: 0.72;
+      }
+
+      .action-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .action-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0 var(--ink);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .envelope,
+        .envelope::before,
+        .envelope::after,
+        .letter,
+        .letter-char,
+        .letter-actions {
+          transition: none;
+        }
+
+        .letter-char {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="letter-bg" aria-hidden="true"></div>
+    <a class="top-link" href="birthday.html">返回开场</a>
+
+    <main class="letter-page">
+      <div class="envelope" id="envelope" role="button" tabindex="0" aria-label="打开祝福信">
+        <div class="envelope-face">
+          <span class="envelope-name">To 欧建锋</span>
+          <button class="open-btn" id="openBtn" type="button">打开信封</button>
+        </div>
+      </div>
+
+      <section class="letter" id="letter" hidden>
+        <div class="letter-paper">
+          <p class="letter-date">2026年8月11日</p>
+          <p class="letter-salute">欧建锋：</p>
+          <p class="letter-line">十九岁的第一天，愿你读想读的书，走想走的路。</p>
+          <p class="letter-line">墨卷收锋，恰是少年从容，</p>
+          <p class="letter-line">十九新程，且看万里长风。</p>
+          <p class="letter-line en">Books closed, doors open wide,</p>
+          <p class="letter-line en">At nineteen, let your dreams be your guide.</p>
+          <p class="letter-line">新的一岁，继续做自在明亮的少年。</p>
+          <p class="letter-sign">生日快乐<br />你的挚友<br />方俊杰</p>
+        </div>
+        <div class="letter-actions" id="letterActions">
+          <a class="action-btn next" href="photos.html">
+            去看照片墙
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a class="action-btn back" href="birthday.html">回到开场</a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var envelope = document.getElementById("envelope");
+        var openBtn = document.getElementById("openBtn");
+        var letter = document.getElementById("letter");
+        var letterElements = Array.prototype.slice.call(
+          document.querySelectorAll(
+            ".letter-date, .letter-salute, .letter-line, .letter-sign"
+          )
+        );
+        var actions = document.getElementById("letterActions");
+        var opening = false;
+        var letterChars = [];
+
+        function splitLetterIntoChars() {
+          var charIndex = 0;
+
+          function isCjk(char) {
+            var code = char.charCodeAt(0);
+            return (
+              (code >= 0x4e00 && code <= 0x9fff) ||
+              (code >= 0x3400 && code <= 0x4dbf)
+            );
+          }
+
+          function isLatin(char) {
+            return /[A-Za-z0-9'’\-]/.test(char);
+          }
+
+          function isPunct(char) {
+            return (
+              "，。！？、；：“”‘’（）《》【】…—,.!?;:".indexOf(char) !== -1
+            );
+          }
+
+          letterElements.forEach(function (element) {
+            var nodes = Array.prototype.slice.call(element.childNodes);
+            element.textContent = "";
+
+            var current = null;
+            var currentType = "";
+
+            function closeGroup() {
+              if (!current) return;
+              current = null;
+              currentType = "";
+            }
+
+            function addCharToGroup(char, type) {
+              if (!current || currentType !== type) {
+                closeGroup();
+                current = document.createElement("span");
+                current.className = "letter-word";
+                element.appendChild(current);
+                currentType = type;
+              }
+              var span = document.createElement("span");
+              span.className = "letter-char";
+              span.textContent = char;
+              span.style.transitionDelay = charIndex * 0.05 + "s";
+              charIndex += 1;
+              letterChars.push(span);
+              current.appendChild(span);
+            }
+
+            nodes.forEach(function (node) {
+              if (node.nodeName === "BR") {
+                closeGroup();
+                element.appendChild(document.createElement("br"));
+                return;
+              }
+
+              Array.from(node.textContent).forEach(function (char) {
+                if (char === " ") {
+                  closeGroup();
+                  element.appendChild(document.createTextNode(" "));
+                  charIndex += 1;
+                  return;
+                }
+                if (isCjk(char)) {
+                  closeGroup();
+                  addCharToGroup(char, "cjk");
+                  return;
+                }
+                if (isLatin(char)) {
+                  addCharToGroup(char, "latin");
+                  return;
+                }
+                if (isPunct(char)) {
+                  addCharToGroup(char, currentType || "punct");
+                } else {
+                  closeGroup();
+                  addCharToGroup(char, "other");
+                }
+              });
+            });
+            closeGroup();
+          });
+          return charIndex;
+        }
+
+        function openLetter() {
+          if (opening) return;
+          opening = true;
+          envelope.classList.add("open");
+          var totalChars = splitLetterIntoChars();
+
+          setTimeout(function () {
+            envelope.classList.add("hidden");
+            letter.hidden = false;
+            requestAnimationFrame(function () {
+              letter.classList.add("visible");
+            });
+          }, 700);
+
+          setTimeout(function () {
+            letterChars.forEach(function (char) {
+              char.classList.add("visible");
+            });
+          }, 1050);
+
+          setTimeout(function () {
+            actions.classList.add("visible");
+          }, 1250 + totalChars * 50);
+        }
+
+        openBtn.addEventListener("click", openLetter);
+        envelope.addEventListener("click", openLetter);
+        envelope.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            openLetter();
+          }
+        });
+      })();
+    </script>
+    <script src="public/page-transition.js"></script>
+  </body>
+</html>

@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4efe4" />
+    <title>展望未来 · 欧建锋</title>
+    <link rel="stylesheet" href="public/page-transition.css" />
+    <style>
+      :root {
+        --ink: #141414;
+        --paper: #f4efe4;
+        --muted: #6d655c;
+        --amber: #b27c2c;
+        --coral: #d96b58;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .future-page {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        padding: 84px 20px 44px;
+      }
+
+      .future-page::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("public/grain.png");
+        background-size: 256px;
+        opacity: 0.08;
+        mix-blend-mode: multiply;
+        pointer-events: none;
+      }
+
+      .top-link,
+      .bottom-link {
+        position: fixed;
+        z-index: 10;
+        padding: 6px 12px;
+        border: 1px solid rgba(20, 20, 20, 0.18);
+        border-radius: 999px;
+        background: rgba(244, 239, 228, 0.82);
+        color: var(--ink);
+        font-family: "Courier New", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        opacity: 0.72;
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .top-link {
+        top: 18px;
+        left: 20px;
+      }
+
+      .bottom-link {
+        bottom: 18px;
+        right: 20px;
+      }
+
+      .future-card {
+        position: relative;
+        z-index: 5;
+        width: min(92vw, 720px);
+        padding: clamp(24px, 5vw, 48px);
+        border: 1px solid rgba(20, 20, 20, 0.14);
+        border-radius: 12px;
+        background: #fffdf6;
+        box-shadow: 0 20px 60px rgba(20, 20, 20, 0.12);
+      }
+
+      .future-kicker {
+        margin: 0 0 8px;
+        color: var(--amber);
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        letter-spacing: 0.28em;
+        text-indent: 0.28em;
+      }
+
+      .future-title {
+        margin: 0;
+        font-size: clamp(2rem, 6vw, 3.6rem);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1.2;
+      }
+
+      .future-sub {
+        margin: 10px 0 22px;
+        color: var(--muted);
+        font-size: clamp(14px, 2vw, 17px);
+        line-height: 1.7;
+      }
+
+      .future-input {
+        display: block;
+        width: 100%;
+        min-height: 250px;
+        padding: 14px 16px;
+        border: 1px solid rgba(20, 20, 20, 0.16);
+        border-radius: 8px;
+        background:
+          repeating-linear-gradient(
+            transparent,
+            transparent 31px,
+            rgba(20, 20, 20, 0.08) 32px
+          ),
+          #fffdf6;
+        color: var(--ink);
+        font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC",
+          sans-serif;
+        font-size: 17px;
+        line-height: 32px;
+        resize: vertical;
+        outline: none;
+      }
+
+      .future-input::placeholder {
+        color: #a69d91;
+      }
+
+      .future-input:focus {
+        border-color: rgba(178, 124, 44, 0.7);
+        box-shadow: 0 0 0 3px rgba(178, 124, 44, 0.12);
+      }
+
+      .future-tools {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 16px;
+      }
+
+      .future-count {
+        margin-right: auto;
+        color: var(--muted);
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+      }
+
+      .future-note {
+        min-height: 20px;
+        margin: 18px 0 0;
+        padding: 12px 18px;
+        border: 1px solid rgba(178, 124, 44, 0.4);
+        border-radius: 999px;
+        background: rgba(178, 124, 44, 0.12);
+        color: #8a5d1f;
+        font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC",
+          sans-serif;
+        font-size: clamp(16px, 2.5vw, 22px);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-align: center;
+      }
+
+      .egg-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-top: 18px;
+        padding: 15px 36px;
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: inherit;
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        box-shadow: 5px 5px 0 rgba(20, 20, 20, 0.2);
+        transition: transform 0.18s ease, box-shadow 0.18s ease;
+      }
+
+      .egg-btn:hover {
+        transform: translate(-2px, -2px);
+        box-shadow: 8px 8px 0 rgba(20, 20, 20, 0.2);
+      }
+
+      .egg-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="future-page">
+      <a class="top-link" href="photos.html">返回照片墙</a>
+
+      <section class="future-card">
+        <p class="future-kicker">TO THE FUTURE</p>
+        <h1 class="future-title">展望未来</h1>
+        <p class="future-sub">给十九岁的自己，留一句想说的话。</p>
+
+        <textarea
+          class="future-input"
+          id="futureInput"
+          placeholder="写下一句想对未来的自己说的话……"
+          aria-label="想对未来的自己说的话"
+        ></textarea>
+
+        <div class="future-tools">
+          <span class="future-count" id="futureCount">0 字</span>
+        </div>
+        <p class="future-note">写完后记得截图保存哦</p>
+        <a class="egg-btn" href="ending.html">
+          查看彩蛋
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+        </a>
+      </section>
+
+      <a class="bottom-link" href="birthday.html">回到开场</a>
+    </main>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var input = document.getElementById("futureInput");
+        var count = document.getElementById("futureCount");
+
+        function updateCount() {
+          count.textContent = input.value.length + " 字";
+        }
+
+        input.addEventListener("input", updateCount);
+        updateCount();
+      })();
+    </script>
+    <script src="public/page-transition.js"></script>
+  </body>
+</html>

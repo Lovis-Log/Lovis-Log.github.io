@@ -1,0 +1,954 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#171412" />
+    <title>我们的回忆 · 欧建锋</title>
+    <link rel="stylesheet" href="public/page-transition.css" />
+    <style>
+      :root {
+        --ink: #171412;
+        --paper: #f4efe4;
+        --muted: #6d655c;
+        --amber: #b27c2c;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .film-page {
+        position: relative;
+        height: 100vh;
+        height: 100svh;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .film-page::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 8;
+        background-image: url("public/grain.png");
+        background-size: 256px;
+        opacity: 0.1;
+        mix-blend-mode: overlay;
+        pointer-events: none;
+      }
+
+      .film-page::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 9;
+        background: radial-gradient(
+          ellipse at center,
+          transparent 55%,
+          rgba(20, 20, 20, 0.16) 100%
+        );
+        pointer-events: none;
+      }
+
+      .top-link {
+        position: fixed;
+        top: 18px;
+        left: 20px;
+        z-index: 20;
+        padding: 6px 12px;
+        border: 1px solid rgba(239, 232, 218, 0.28);
+        border-radius: 999px;
+        background: rgba(244, 239, 228, 0.82);
+        color: var(--ink);
+        border-color: rgba(20, 20, 20, 0.18);
+        font-family: "Courier New", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        opacity: 0.72;
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .future-link {
+        position: fixed;
+        top: 18px;
+        right: 20px;
+        z-index: 20;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 24px;
+        border: 1px solid var(--ink);
+        border-radius: 999px;
+        background: var(--ink);
+        color: var(--paper);
+        font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC",
+          sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.12em;
+        text-decoration: none;
+        box-shadow: 4px 4px 0 rgba(20, 20, 20, 0.2);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .future-link svg {
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .film-header {
+        position: relative;
+        z-index: 10;
+        flex: 0 0 auto;
+        padding: clamp(10px, 2vh, 16px) 16px 6px;
+        text-align: center;
+      }
+
+      .film-kicker {
+        margin: 0 0 3px;
+        color: var(--amber);
+        font-family: "Courier New", monospace;
+        font-size: clamp(8px, 1vw, 10px);
+        letter-spacing: 0.24em;
+        text-indent: 0.24em;
+      }
+
+      .film-title {
+        margin: 0;
+        color: var(--ink);
+        font-size: clamp(1.15rem, 3vw, 1.7rem);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1.15;
+      }
+
+      .film-sub {
+        margin: 3px 0 0;
+        color: var(--muted);
+        font-family: "Courier New", monospace;
+        font-size: clamp(9px, 1.1vw, 11px);
+        letter-spacing: 0.16em;
+        text-indent: 0.16em;
+      }
+
+      .film-grid {
+        position: relative;
+        z-index: 10;
+        flex: 1 1 auto;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 4px 0;
+      }
+
+      .film-reel {
+        position: relative;
+        flex: 1 1 0;
+        min-height: 0;
+      }
+
+      .reel-label {
+        position: absolute;
+        top: 9px;
+        left: 10px;
+        z-index: 12;
+        color: var(--amber);
+        font-family: "Courier New", monospace;
+        font-size: 9px;
+        letter-spacing: 0.2em;
+        text-indent: 0.2em;
+      }
+
+      .film-viewport {
+        position: relative;
+        z-index: 10;
+        overflow-x: auto;
+        overflow-y: hidden;
+        height: 100%;
+        padding: 6px 0 8px;
+        cursor: grab;
+        scrollbar-width: none;
+        touch-action: pan-x;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .film-viewport::-webkit-scrollbar {
+        display: none;
+      }
+
+      .film-viewport.dragging {
+        cursor: grabbing;
+      }
+
+      .film-strip {
+        position: relative;
+        display: flex;
+        gap: 14px;
+        width: max-content;
+        height: 100%;
+        padding: 0 8vw 14px;
+        background: linear-gradient(
+          180deg,
+          rgba(38, 33, 28, 0.78),
+          rgba(29, 25, 21, 0.78)
+        );
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.14),
+          0 18px 40px rgba(20, 20, 20, 0.16);
+        backdrop-filter: blur(18px) saturate(160%);
+        -webkit-backdrop-filter: blur(18px) saturate(160%);
+      }
+
+      .film-strip::before,
+      .film-strip::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 22px;
+        background-image: radial-gradient(
+          circle at 13px 11px,
+          #171412 7px,
+          transparent 8px
+        );
+        background-size: 26px 22px;
+        background-repeat: repeat-x;
+        pointer-events: none;
+      }
+
+      .film-strip::before {
+        display: block;
+      }
+
+      .film-strip::after {
+        bottom: 4px;
+      }
+
+      .film-frame {
+        position: relative;
+        z-index: 3;
+        flex: 0 0 auto;
+        width: clamp(150px, 32vw, 230px);
+        height: 100%;
+        padding: 3px 3px 2px;
+        display: flex;
+        flex-direction: column;
+        background: #efe8da;
+        box-shadow: 0 20px 44px rgba(0, 0, 0, 0.46);
+        transform: rotate(var(--tilt, 0deg));
+      }
+
+      .film-frame:nth-child(odd) {
+        --tilt: -1.2deg;
+      }
+
+      .film-frame:nth-child(even) {
+        --tilt: 1deg;
+      }
+
+      .film-frame img {
+        display: block;
+        width: 100%;
+        flex: 1 1 auto;
+        min-height: 0;
+        object-fit: contain;
+        object-position: center;
+        background: #e8e0d0;
+        filter: contrast(1.03) saturate(0.94);
+        transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .film-frame:hover {
+        z-index: 5;
+      }
+
+      .film-frame:hover img {
+        transform: scale(2);
+      }
+
+      .frame-caption {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        padding-top: 4px;
+        flex: 0 0 auto;
+        color: #3b352d;
+        font-family: "Courier New", monospace;
+        font-size: 8px;
+        letter-spacing: 0.12em;
+      }
+
+      .frame-index {
+        color: #8d8479;
+      }
+
+      .film-controls {
+        position: relative;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        gap: 12px;
+        padding: 6px 20px 2px;
+      }
+
+      .control-btn {
+        display: grid;
+        place-items: center;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        border: 1px solid rgba(239, 232, 218, 0.3);
+        border-radius: 50%;
+        background: rgba(244, 239, 228, 0.78);
+        color: var(--ink);
+        border-color: rgba(20, 20, 20, 0.18);
+        cursor: pointer;
+        transition: transform 0.18s ease, border-color 0.18s ease;
+      }
+
+      .control-btn:hover {
+        transform: translateY(-2px);
+        border-color: var(--amber);
+      }
+
+      .control-btn:active {
+        transform: scale(0.96);
+      }
+
+      .control-btn:focus-visible {
+        outline: 2px solid var(--amber);
+        outline-offset: 3px;
+      }
+
+      .control-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .film-counter {
+        color: var(--amber);
+        font-family: "Courier New", monospace;
+        font-size: 15px;
+        letter-spacing: 0.22em;
+      }
+
+      .film-hint {
+        position: relative;
+        z-index: 10;
+        flex: 0 0 auto;
+        margin: 0;
+        padding-bottom: 8px;
+        color: #8d8479;
+        font-family: "Courier New", monospace;
+        font-size: 10px;
+        letter-spacing: 0.16em;
+        text-align: center;
+      }
+
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        z-index: 60;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+        background: rgba(12, 10, 9, 0.92);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .lightbox-stage {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        max-width: min(88vw, 1000px);
+        max-height: 88vh;
+        margin: 0;
+      }
+
+      .lightbox-stage img {
+        display: block;
+        max-width: 100%;
+        max-height: 78vh;
+        object-fit: contain;
+        border: 1px solid rgba(239, 232, 218, 0.22);
+        border-radius: 4px;
+        box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+      }
+
+      .lightbox-caption {
+        color: var(--amber);
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        letter-spacing: 0.22em;
+        text-indent: 0.22em;
+      }
+
+      .lightbox-btn {
+        position: fixed;
+        z-index: 61;
+        display: grid;
+        place-items: center;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        border: 1px solid rgba(239, 232, 218, 0.3);
+        border-radius: 50%;
+        background: rgba(23, 20, 18, 0.72);
+        color: #efe8da;
+        cursor: pointer;
+        transition: border-color 0.18s ease, transform 0.18s ease;
+      }
+
+      .lightbox-btn:hover {
+        border-color: var(--amber);
+        transform: scale(1.05);
+      }
+
+      .lightbox-btn:focus-visible {
+        outline: 2px solid var(--amber);
+        outline-offset: 3px;
+      }
+
+      .lightbox-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 2;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+
+      .lightbox-close {
+        top: 18px;
+        right: 18px;
+      }
+
+      .lightbox-prev {
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .lightbox-next {
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+
+      .lightbox-prev:hover,
+      .lightbox-next:hover {
+        transform: translateY(-50%) scale(1.05);
+      }
+
+      @media (min-width: 900px) {
+        .film-header {
+          text-align: left;
+          padding-left: clamp(40px, 9vw, 120px);
+          padding-right: clamp(40px, 9vw, 120px);
+        }
+      }
+
+      @media (max-width: 520px) {
+        .film-header {
+          padding-top: clamp(64px, 9vh, 78px);
+          padding-left: 16px;
+          padding-right: 16px;
+          text-align: left;
+        }
+
+        .film-title {
+          font-size: clamp(1rem, 3.4vw, 1.4rem);
+          max-width: calc(100vw - 190px);
+        }
+
+        .future-link {
+          top: 14px;
+          right: 12px;
+          padding: 7px 14px;
+          gap: 6px;
+          font-size: 12px;
+          box-shadow: none;
+        }
+
+        .future-link svg {
+          width: 14px;
+          height: 14px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .film-viewport {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="film-page">
+      <a class="top-link" href="letter.html">返回祝福信</a>
+      <a class="future-link" href="future.html">
+        展望未来
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M5 12h14M13 6l6 6-6 6" />
+        </svg>
+      </a>
+
+      <header class="film-header">
+        <p class="film-kicker">ROLL 019 / EST. 2026</p>
+        <h1 class="film-title">我们的回忆</h1>
+        <p class="film-sub">欧建锋 · 生日胶片</p>
+      </header>
+
+      <section class="film-grid" aria-label="三行胶卷照片墙">
+        <div class="film-reel">
+          <span class="reel-label">REEL A</span>
+          <div class="film-viewport" id="filmViewport1">
+            <div class="film-strip" id="filmStrip1"></div>
+          </div>
+        </div>
+        <div class="film-reel">
+          <span class="reel-label">REEL B</span>
+          <div class="film-viewport" id="filmViewport2">
+            <div class="film-strip" id="filmStrip2"></div>
+          </div>
+        </div>
+        <div class="film-reel">
+          <span class="reel-label">REEL C</span>
+          <div class="film-viewport" id="filmViewport3">
+            <div class="film-strip" id="filmStrip3"></div>
+          </div>
+        </div>
+      </section>
+
+      <div class="film-controls">
+        <button class="control-btn" id="prevBtn" type="button" aria-label="上一格">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M15 18l-6-6 6-6" />
+          </svg>
+        </button>
+        <span class="film-counter">30 PHOTOS / 3 REELS</span>
+        <button class="control-btn" id="nextBtn" type="button" aria-label="下一格">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M9 6l6 6-6 6" />
+          </svg>
+        </button>
+      </div>
+
+      <p class="film-hint">拖动或滚动浏览胶片</p>
+    </main>
+
+    <div class="lightbox" id="lightbox" hidden>
+      <figure class="lightbox-stage">
+        <img id="lightboxImg" src="" alt="" />
+        <figcaption class="lightbox-caption" id="lightboxCaption"></figcaption>
+      </figure>
+      <button class="lightbox-btn lightbox-close" id="lightboxClose" type="button" aria-label="关闭">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M18 6L6 18M6 6l12 12" />
+        </svg>
+      </button>
+      <button class="lightbox-btn lightbox-prev" id="lightboxPrev" type="button" aria-label="上一张">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <button class="lightbox-btn lightbox-next" id="lightboxNext" type="button" aria-label="下一张">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M9 6l6 6-6 6" />
+        </svg>
+      </button>
+    </div>
+
+    <script src="public/photos/manifest.js"></script>
+    <script>
+      (function () {
+        "use strict";
+
+        var viewports = [
+          document.getElementById("filmViewport1"),
+          document.getElementById("filmViewport2"),
+          document.getElementById("filmViewport3")
+        ];
+        var strips = [
+          document.getElementById("filmStrip1"),
+          document.getElementById("filmStrip2"),
+          document.getElementById("filmStrip3")
+        ];
+        var prevBtn = document.getElementById("prevBtn");
+        var nextBtn = document.getElementById("nextBtn");
+        var reduceMotion = window.matchMedia(
+          "(prefers-reduced-motion: reduce)"
+        ).matches;
+        var autoTimer = null;
+        var paused = false;
+        var hovered = false;
+        var dragging = false;
+        var pointerId = null;
+        var dragStartX = 0;
+        var dragStartY = 0;
+        var dragStartLeft = 0;
+        var activeViewport = null;
+        var autoOffsets = [0, 0, 0];
+        var filmPhotos = window.FILM_PHOTOS || [];
+        var lightbox = document.getElementById("lightbox");
+        var lightboxImg = document.getElementById("lightboxImg");
+        var lightboxCaption = document.getElementById("lightboxCaption");
+        var lightboxClose = document.getElementById("lightboxClose");
+        var lightboxPrev = document.getElementById("lightboxPrev");
+        var lightboxNext = document.getElementById("lightboxNext");
+        var lightboxIndex = 0;
+
+        function buildFrames() {
+          var photos = window.FILM_PHOTOS || [];
+          var perRow = Math.ceil(photos.length / viewports.length);
+
+          strips.forEach(function (strip, rowIndex) {
+            strip.textContent = "";
+            var rowPhotos = photos.slice(
+              rowIndex * perRow,
+              rowIndex * perRow + perRow
+            );
+
+            for (var copy = 0; copy < 2; copy += 1) {
+              rowPhotos.forEach(function (photo, photoIndex) {
+                var figure = document.createElement("figure");
+                figure.className = "film-frame";
+
+                var img = document.createElement("img");
+                img.src = photo.src;
+                img.alt = photo.alt || "";
+                img.loading = "lazy";
+                img.decoding = "async";
+                img.dataset.index = String(rowIndex * perRow + photoIndex);
+
+                var caption = document.createElement("figcaption");
+                caption.className = "frame-caption";
+
+                var label = document.createElement("span");
+                label.textContent = photo.label || "";
+
+                var indexSpan = document.createElement("span");
+                indexSpan.className = "frame-index";
+                indexSpan.textContent = "19";
+
+                caption.appendChild(label);
+                caption.appendChild(indexSpan);
+                figure.appendChild(img);
+                figure.appendChild(caption);
+                strip.appendChild(figure);
+              });
+            }
+          });
+        }
+
+        function frameStep() {
+          var firstFrame = strips[0]
+            ? strips[0].querySelector(".film-frame")
+            : null;
+          return firstFrame ? firstFrame.offsetWidth + 18 : 300;
+        }
+
+        function stopAuto() {
+          if (autoTimer) {
+            clearInterval(autoTimer);
+            autoTimer = null;
+          }
+        }
+
+        function startAuto() {
+          stopAuto();
+          if (reduceMotion) return;
+          autoTimer = setInterval(function () {
+            if (paused || dragging) return;
+            viewports.forEach(function (viewport, index) {
+              var half = strips[index].scrollWidth / 2;
+              if (half <= 0) return;
+              autoOffsets[index] += 1.8;
+              var step = Math.floor(autoOffsets[index]);
+              autoOffsets[index] -= step;
+              var delta = index === 1 ? -step : step;
+              viewport.scrollLeft += delta;
+              if (index === 1) {
+                if (viewport.scrollLeft <= 0) {
+                  viewport.scrollLeft += half;
+                }
+              } else if (viewport.scrollLeft >= half) {
+                viewport.scrollLeft -= half;
+              }
+            });
+          }, 20);
+        }
+
+        function pauseFor(duration) {
+          paused = true;
+          window.clearTimeout(pauseFor.timer);
+          pauseFor.timer = window.setTimeout(function () {
+            paused = false;
+          }, duration);
+        }
+
+        function openLightbox(index) {
+          if (!filmPhotos.length) return;
+          lastTapTime = Date.now();
+          lightboxIndex = (index + filmPhotos.length) % filmPhotos.length;
+          var photo = filmPhotos[lightboxIndex];
+          lightboxImg.src = photo.src;
+          lightboxImg.alt = photo.alt || "";
+          lightboxCaption.textContent = photo.label || "";
+          lightbox.hidden = false;
+          paused = true;
+          window.clearTimeout(pauseFor.timer);
+        }
+
+        function closeLightbox() {
+          lightbox.hidden = true;
+          lightboxImg.removeAttribute("src");
+          if (!hovered) paused = false;
+        }
+
+        function stepLightbox(direction) {
+          openLightbox(lightboxIndex + direction);
+        }
+
+        function scrollByFrame(direction) {
+          pauseFor(2600);
+          viewports.forEach(function (viewport, index) {
+            var delta = index === 1 ? -direction : direction;
+            viewport.scrollBy({
+              left: frameStep() * delta,
+              behavior: reduceMotion ? "auto" : "smooth"
+            });
+          });
+        }
+
+        function handlePointerEnd(event, viewport) {
+          if (event.pointerId !== pointerId || activeViewport !== viewport) {
+            return;
+          }
+          var wasDragging = dragging;
+          if (wasDragging) {
+            viewport.classList.remove("dragging");
+          } else if (downPhotoIndex !== null) {
+            pendingOpenIndex = downPhotoIndex;
+            window.clearTimeout(openTimer);
+            openTimer = window.setTimeout(function () {
+              if (pendingOpenIndex !== null) {
+                var index = pendingOpenIndex;
+                pendingOpenIndex = null;
+                openLightbox(index);
+              }
+            }, 450);
+          }
+          dragging = false;
+          pointerId = null;
+          activeViewport = null;
+          downPhotoIndex = null;
+          if (lightbox.hidden && !hovered) paused = false;
+        }
+
+        var downPhotoIndex = null;
+        var lastTapTime = 0;
+        var pendingOpenIndex = null;
+        var openTimer = null;
+
+        viewports.forEach(function (viewport) {
+          viewport.addEventListener(
+            "wheel",
+            function (event) {
+              event.preventDefault();
+              viewport.scrollLeft += event.deltaY + event.deltaX;
+            },
+            { passive: false }
+          );
+
+          viewport.addEventListener("pointerdown", function (event) {
+            pointerId = event.pointerId;
+            activeViewport = viewport;
+            dragging = false;
+            dragStartX = event.clientX;
+            dragStartY = event.clientY;
+            dragStartLeft = viewport.scrollLeft;
+            var img = event.target.closest
+              ? event.target.closest(".film-frame img")
+              : null;
+            downPhotoIndex =
+              img && img.dataset.index !== undefined
+                ? Number(img.dataset.index)
+                : null;
+            paused = true;
+            viewport.setPointerCapture(event.pointerId);
+          });
+
+          viewport.addEventListener("pointermove", function (event) {
+            if (
+              event.pointerId !== pointerId ||
+              activeViewport !== viewport
+            ) {
+              return;
+            }
+            if (!dragging) {
+              var distance =
+                Math.abs(event.clientX - dragStartX) +
+                Math.abs(event.clientY - dragStartY);
+              if (distance > 6) {
+                dragging = true;
+                viewport.classList.add("dragging");
+              }
+            }
+            if (dragging) {
+              viewport.scrollLeft =
+                dragStartLeft - (event.clientX - dragStartX);
+            }
+          });
+
+          viewport.addEventListener("pointerup", function (event) {
+            handlePointerEnd(event, viewport);
+          });
+          viewport.addEventListener("pointercancel", function (event) {
+            if (
+              event.pointerId !== pointerId ||
+              activeViewport !== viewport
+            ) {
+              return;
+            }
+            if (
+              !dragging &&
+              downPhotoIndex !== null &&
+              Math.abs(event.clientX - dragStartX) +
+                Math.abs(event.clientY - dragStartY) <=
+                12
+            ) {
+              openLightbox(downPhotoIndex);
+            }
+            if (dragging) {
+              viewport.classList.remove("dragging");
+            }
+            dragging = false;
+            pointerId = null;
+            activeViewport = null;
+            downPhotoIndex = null;
+            if (lightbox.hidden && !hovered) paused = false;
+          });
+        });
+
+        strips.forEach(function (strip) {
+          strip.addEventListener("mouseenter", function () {
+            hovered = true;
+            paused = true;
+            window.clearTimeout(pauseFor.timer);
+          });
+          strip.addEventListener("mouseleave", function () {
+            hovered = false;
+            if (!dragging && lightbox.hidden) paused = false;
+          });
+        });
+
+        prevBtn.addEventListener("click", function () {
+          scrollByFrame(-1);
+        });
+        nextBtn.addEventListener("click", function () {
+          scrollByFrame(1);
+        });
+
+        lightbox.addEventListener("click", function (event) {
+          if (
+            event.target === lightbox &&
+            Date.now() - lastTapTime > 600
+          ) {
+            closeLightbox();
+          }
+        });
+        lightboxClose.addEventListener("click", closeLightbox);
+        lightboxPrev.addEventListener("click", function () {
+          stepLightbox(-1);
+        });
+        lightboxNext.addEventListener("click", function () {
+          stepLightbox(1);
+        });
+
+        document.addEventListener("click", function (event) {
+          if (pendingOpenIndex !== null) {
+            var index = pendingOpenIndex;
+            pendingOpenIndex = null;
+            window.clearTimeout(openTimer);
+            openLightbox(index);
+            return;
+          }
+          if (Date.now() - lastTapTime < 600) return;
+          var img = event.target.closest
+            ? event.target.closest(".film-frame img")
+            : null;
+          if (img && img.dataset.index !== undefined) {
+            openLightbox(Number(img.dataset.index));
+          }
+        });
+
+        window.addEventListener("keydown", function (event) {
+          if (!lightbox.hidden) {
+            if (event.key === "Escape") {
+              closeLightbox();
+            } else if (event.key === "ArrowLeft") {
+              stepLightbox(-1);
+            } else if (event.key === "ArrowRight") {
+              stepLightbox(1);
+            }
+            return;
+          }
+          if (event.key === "ArrowLeft") {
+            scrollByFrame(-1);
+          } else if (event.key === "ArrowRight") {
+            scrollByFrame(1);
+          }
+        });
+
+        buildFrames();
+        startAuto();
+      })();
+    </script>
+    <script src="public/page-transition.js"></script>
+  </body>
+</html>

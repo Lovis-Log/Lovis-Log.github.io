@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4efe4" />
+    <title>Our promise · 欧建锋</title>
+    <link rel="stylesheet" href="public/page-transition.css" />
+    <style>
+      :root {
+        --ink: #141414;
+        --paper: #f4efe4;
+        --muted: #6d655c;
+        --amber: #b27c2c;
+        --coral: #d96b58;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+      }
+
+      body {
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC",
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .ending-page {
+        position: relative;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        padding: 84px 20px 48px;
+      }
+
+      .ending-page::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("public/grain.png");
+        background-size: 256px;
+        opacity: 0.08;
+        mix-blend-mode: multiply;
+        pointer-events: none;
+      }
+
+      .top-link,
+      .bottom-link {
+        position: fixed;
+        z-index: 10;
+        padding: 6px 12px;
+        border: 1px solid rgba(20, 20, 20, 0.18);
+        border-radius: 999px;
+        background: rgba(244, 239, 228, 0.82);
+        color: var(--ink);
+        font-family: "Courier New", monospace;
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        opacity: 0.72;
+        text-decoration: none;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .top-link {
+        top: 18px;
+        left: 20px;
+      }
+
+      .bottom-link {
+        bottom: 18px;
+        right: 20px;
+      }
+
+      .egg-card {
+        position: relative;
+        z-index: 5;
+        width: min(92vw, 720px);
+        padding: clamp(26px, 5vw, 52px);
+        border: 1px solid rgba(20, 20, 20, 0.14);
+        border-radius: 14px;
+        background: #fffdf6;
+        box-shadow: 0 20px 60px rgba(20, 20, 20, 0.12);
+        text-align: center;
+      }
+
+      .egg-kicker {
+        margin: 0 0 8px;
+        color: var(--amber);
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        letter-spacing: 0.28em;
+        text-indent: 0.28em;
+      }
+
+      .egg-title {
+        margin: 0;
+        font-size: clamp(2rem, 6vw, 3.6rem);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        line-height: 1.2;
+      }
+
+      .egg-sub {
+        margin: 12px auto 24px;
+        max-width: 30em;
+        color: var(--muted);
+        font-size: clamp(14px, 2vw, 17px);
+        line-height: 1.8;
+      }
+
+      .egg-reveal {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 22px;
+      }
+
+      .promise-note {
+        min-height: 20px;
+        margin: 4px 0 0;
+        padding: 13px 22px;
+        border: 1px solid rgba(178, 124, 44, 0.4);
+        border-radius: 999px;
+        background: rgba(178, 124, 44, 0.12);
+        color: #8a5d1f;
+        font-family: "PingFang SC", "Microsoft YaHei", "Noto Sans SC",
+          sans-serif;
+        font-size: clamp(16px, 2.5vw, 22px);
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-align: center;
+      }
+
+      .player {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        width: 100%;
+        max-width: 520px;
+        padding: 18px;
+        border: 1px solid rgba(20, 20, 20, 0.12);
+        border-radius: 12px;
+        background: #faf5ea;
+      }
+
+      .vinyl {
+        flex: 0 0 auto;
+        width: 104px;
+        height: 104px;
+        border-radius: 50%;
+        background:
+          radial-gradient(
+            circle,
+            #b27c2c 0 16%,
+            #141414 17% 22%,
+            transparent 23%
+          ),
+          repeating-radial-gradient(
+            circle,
+            #171412 0 2px,
+            #24201b 3px 5px
+          );
+        box-shadow: 0 12px 26px rgba(20, 20, 20, 0.26);
+      }
+
+      .player.playing .vinyl {
+        animation: spin 3.5s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .player-main {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        min-width: 0;
+      }
+
+      .play-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        padding: 0;
+        border: 1px solid var(--ink);
+        border-radius: 50%;
+        background: var(--ink);
+        color: var(--paper);
+        cursor: pointer;
+      }
+
+      .play-btn:focus-visible {
+        outline: 3px solid var(--coral);
+        outline-offset: 3px;
+      }
+
+      .play-btn svg {
+        width: 20px;
+        height: 20px;
+        fill: currentColor;
+      }
+
+      .progress {
+        width: 100%;
+        accent-color: var(--amber);
+      }
+
+      .time {
+        color: var(--muted);
+        font-family: "Courier New", monospace;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+      }
+
+      @media (max-width: 520px) {
+        .player {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .player-main {
+          align-items: center;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .player.playing .vinyl {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body data-transition="curtain">
+    <main class="ending-page">
+      <a class="top-link" href="future.html">返回展望未来</a>
+
+      <section class="egg-card" id="eggCard">
+        <div class="egg-reveal" id="eggReveal">
+          <p class="egg-kicker">FOR OU JIANFENG</p>
+          <h1 class="egg-title">Our promise</h1>
+
+          <div class="player" id="player">
+            <div class="vinyl" aria-hidden="true"></div>
+            <div class="player-main">
+              <button class="play-btn" id="playBtn" type="button" aria-label="播放">
+                <svg id="iconPlay" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 5v14l11-7z" />
+                </svg>
+                <svg id="iconPause" viewBox="0 0 24 24" aria-hidden="true" hidden>
+                  <path d="M7 5h4v14H7zM13 5h4v14h-4z" />
+                </svg>
+              </button>
+              <input class="progress" id="progress" type="range" min="0" max="100" value="0" aria-label="播放进度" />
+              <span class="time" id="time">0:00 / 0:00</span>
+            </div>
+          </div>
+
+          <p class="promise-note">别忘记我们的约定哦</p>
+        </div>
+      </section>
+    </main>
+
+    <audio id="audio" src="public/audio/easter-egg.m4a" preload="metadata"></audio>
+
+    <script>
+      (function () {
+        "use strict";
+
+        var reveal = document.getElementById("eggReveal");
+        var player = document.getElementById("player");
+        var playBtn = document.getElementById("playBtn");
+        var iconPlay = document.getElementById("iconPlay");
+        var iconPause = document.getElementById("iconPause");
+        var progress = document.getElementById("progress");
+        var timeEl = document.getElementById("time");
+        var audio = document.getElementById("audio");
+
+        function formatTime(seconds) {
+          if (!isFinite(seconds)) seconds = 0;
+          var m = Math.floor(seconds / 60);
+          var s = Math.floor(seconds % 60);
+          return m + ":" + String(s).padStart(2, "0");
+        }
+
+        function updateTime() {
+          timeEl.textContent =
+            formatTime(audio.currentTime) + " / " + formatTime(audio.duration);
+          if (audio.duration) {
+            progress.value = (audio.currentTime / audio.duration) * 100;
+          }
+        }
+
+        function setPlaying(playing) {
+          player.classList.toggle("playing", playing);
+          iconPlay.hidden = playing;
+          iconPause.hidden = !playing;
+          playBtn.setAttribute("aria-label", playing ? "暂停" : "播放");
+        }
+
+        function tryPlay() {
+          var promise = audio.play();
+          if (promise && promise.catch) {
+            promise.catch(function () {
+              setPlaying(false);
+            });
+          }
+        }
+
+        playBtn.addEventListener("click", function () {
+          if (audio.paused) {
+            tryPlay();
+          } else {
+            audio.pause();
+            setPlaying(false);
+          }
+        });
+
+        progress.addEventListener("input", function () {
+          if (audio.duration) {
+            audio.currentTime = (progress.value / 100) * audio.duration;
+          }
+        });
+
+        audio.addEventListener("play", function () {
+          setPlaying(true);
+        });
+        audio.addEventListener("pause", function () {
+          setPlaying(false);
+        });
+        audio.addEventListener("ended", function () {
+          setPlaying(false);
+          progress.value = 0;
+          timeEl.textContent = "0:00 / " + formatTime(audio.duration);
+        });
+        audio.addEventListener("timeupdate", updateTime);
+        audio.addEventListener("loadedmetadata", updateTime);
+
+        updateTime();
+      })();
+    </script>
+    <script src="public/page-transition.js"></script>
+  </body>
+</html>
